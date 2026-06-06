@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InAmigos Foundation - Advanced Website Features Design</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --primary: #FF4F5A;
+      --primary-hover: #ff3340;
+      --secondary: #0A9396;
+      --secondary-dark: #076b6d;
+      --dark: #1A1A1A;
+      --light: #F4F6F8;
+      --white: #FFFFFF;
+      --font-display: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body { 
+      font-family: var(--font-body); 
+      background: linear-gradient(-45deg, #f4f6f8, #e0e7ee, #d1e3e5, #f8edeb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--dark); 
+      padding: 80px 40px; 
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .presentation-container { max-width: 1400px; margin: 0 auto; perspective: 1000px; }
+    
+    .presentation-header { text-align: center; margin-bottom: 100px; animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .presentation-header h1 { font-family: var(--font-display); font-size: 4.5rem; font-weight: 800; color: #111; margin-bottom: 15px; letter-spacing: -1.5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .presentation-header p { font-size: 1.35rem; color: #555; max-width: 750px; margin: 0 auto; line-height: 1.6;}
+    
+    .feature-block { 
+      display: flex; 
+      margin-bottom: 100px; 
+      background: rgba(255, 255, 255, 0.6); 
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 32px; 
+      overflow: hidden; 
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.5) inset; 
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+
+    .feature-block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 40px 80px -20px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,255,255,0.8) inset; 
+    }
+
+    .feature-block:nth-child(2) { animation-delay: 0.1s; }
+    .feature-block:nth-child(3) { animation-delay: 0.2s; }
+    .feature-block:nth-child(4) { animation-delay: 0.3s; }
+    .feature-block:nth-child(5) { animation-delay: 0.4s; }
+    .feature-block:nth-child(6) { animation-delay: 0.5s; }
+    .feature-block:nth-child(7) { animation-delay: 0.6s; }
+    
+    .annotation { 
+      flex: 0 0 35%; 
+      padding: 70px; 
+      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(250,250,250,0.4) 100%);
+      border-right: 1px solid rgba(0,0,0,0.05); 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+    }
+    
+    .badge { 
+      display: inline-block; 
+      padding: 8px 20px; 
+      background: linear-gradient(135deg, rgba(10, 147, 150, 0.15), rgba(10, 147, 150, 0.05));
+      color: var(--secondary); 
+      font-family: var(--font-display);
+      font-weight: 800; 
+      border-radius: 50px; 
+      font-size: 0.95rem; 
+      margin-bottom: 24px; 
+      width: max-content; 
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      box-shadow: 0 4px 10px rgba(10, 147, 150, 0.1);
+    }
+    
+    .annotation h2 { font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1; letter-spacing: -0.5px;}
+    .annotation p { font-size: 1.15rem; line-height: 1.7; color: #555; }
+    
+    .mockup-window { 
+      flex: 1; 
+      padding: 50px; 
+      position: relative;
+    }
+    
+    .browser-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .browser-wrapper:hover {
+      transform: scale(1.02);
+    }
+
+    .browser-bar { 
+      height: 40px; 
+      background: rgba(230, 232, 235, 0.9); 
+      backdrop-filter: blur(10px);
+      display: flex; 
+      align-items: center; 
+      padding: 0 20px; 
+      gap: 10px; 
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .browser-dot { width: 14px; height: 14px; border-radius: 50%; background: #FF5F56; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); }
+    .browser-dot:nth-child(2) { background: #FFBD2E; }
+    .browser-dot:nth-child(3) { background: #27C93F; }
+    
+    .mockup-content { 
+      background: var(--white); 
+      position: relative; 
+      min-height: 450px;
+      display: flex;
+    }
+
+    .btn { 
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 18px 36px; background: var(--primary); color: white; text-decoration: none; 
+      border-radius: 12px; font-weight: 600; font-size: 1.1rem; 
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+      box-shadow: 0 10px 20px rgba(255, 79, 90, 0.3);
+      position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 79, 90, 0.4); background: var(--primary-hover); }
+    .btn:hover::after { left: 150%; }
+    .btn-secondary { background: rgba(255,255,255,0.9); color: var(--secondary); margin-left: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .btn-secondary:hover { background: #fff; color: var(--secondary-dark); box-shadow: 0 15px 25px rgba(0,0,0,0.1); }
+
+    /* Feature 1 */
+    .hero-section { width: 100%; background: url('./hero.png') center/cover; position: relative; display: flex; align-items: center; padding: 80px 60px; color: white; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10, 147, 150, 0.95) 0%, rgba(10, 147, 150, 0.2) 100%); z-index: 1; mix-blend-mode: multiply;}
+    .hero-overlay-2 { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 1;}
+    .hero-content { position: relative; z-index: 2; max-width: 500px; }
+    .hero-content h3 { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; font-weight: 800; text-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+    .hero-content p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.95; line-height: 1.6; text-shadow: 0 2px 10px rgba(0,0,0,0.3);}
+
+    /* Feature 2 */
+    .impact-section { padding: 60px; display: flex; gap: 50px; align-items: center; width: 100%; background: #fff;}
+    .impact-image { flex: 1; height: 380px; background: url('./impact.png') center/cover; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);}
+    .impact-stats { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .stat-card { background: linear-gradient(135deg, #ffffff 0%, #f9fbfb 100%); padding: 35px 20px; border-radius: 20px; text-align: center; border-bottom: 5px solid var(--secondary); box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+    .stat-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(10, 147, 150, 0.15); }
+    .stat-number { font-family: var(--font-display); font-size: 3.2rem; font-weight: 800; color: var(--primary); line-height: 1;}
+    .stat-label { font-size: 1.05rem; color: #555; margin-top: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+
+    /* Feature 3 */
+    .campaigns-section { padding: 80px 60px; background: #FAFAFA; width: 100%; }
+    .campaigns-header { margin-bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .campaigns-header h3 { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; }
+    .campaigns-header a { color: var(--secondary); font-weight: 600; text-decoration: none; padding: 10px 20px; border-radius: 50px; background: rgba(10, 147, 150, 0.1); transition: all 0.3s;}
+    .campaigns-header a:hover { background: var(--secondary); color: white;}
+    .campaign-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 35px; }
+    .campaign-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .campaign-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+    .campaign-img { height: 200px; position: relative; overflow: hidden; }
+    .campaign-img.c1 { background: linear-gradient(135deg, #0A9396, #94D2BD); }
+    .campaign-img.c2 { background: linear-gradient(135deg, #FF4F5A, #FFB5A7); }
+    .campaign-badge { position: absolute; top: 15px; left: 15px; background: white; padding: 6px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--dark); box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+    .campaign-info { padding: 30px; }
+    .campaign-info h4 { font-size: 1.4rem; margin-bottom: 15px; font-family: var(--font-display); font-weight: 800;}
+    .progress-bar { height: 10px; background: #F0F0F0; border-radius: 50px; margin: 20px 0; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);}
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), #ff8a92); width: 75%; border-radius: 50px; position: relative;}
+    .progress-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent); background-size: 20px 20px; animation: moveStripes 1s linear infinite;}
+    .progress-stats { display: flex; justify-content: space-between; font-size: 0.95rem; color: #555; font-weight: 600;}
+
+    /* Feature 4 */
+    .volunteer-section { padding: 80px 60px; display: flex; gap: 60px; background: linear-gradient(135deg, var(--secondary) 0%, #065a5b 100%); color: white; align-items: center; width: 100%; position: relative; overflow: hidden;}
+    .volunteer-section::before { content:''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none;}
+    .volunteer-text { flex: 1; position: relative; z-index: 2;}
+    .volunteer-text h3 { font-family: var(--font-display); font-size: 3rem; font-weight: 800; margin-bottom: 25px; line-height: 1.1;}
+    .volunteer-text p { font-size: 1.2rem; line-height: 1.6; opacity: 0.9; margin-bottom: 40px; }
+    .volunteer-form { flex: 1; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 50px; border-radius: 24px; color: var(--dark); box-shadow: 0 30px 60px rgba(0,0,0,0.3); position: relative; z-index: 2; border: 1px solid rgba(255,255,255,0.5);}
+    .form-group { margin-bottom: 25px; }
+    .form-group label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; color: #444;}
+    .form-group input, .form-group select { width: 100%; padding: 16px; border: 2px solid #EAEAEA; border-radius: 12px; font-family: inherit; font-size: 1.05rem; background: #FAFAFA; transition: all 0.3s;}
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--secondary); background: #FFF; box-shadow: 0 0 0 4px rgba(10, 147, 150, 0.1);}
+    .form-btn { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(255, 79, 90, 0.3);}
+    .form-btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 15px 30px rgba(255, 79, 90, 0.4);}
+
+    /* Feature 5 */
+    .testimonials-section { padding: 100px 60px; text-align: center; width: 100%; display: flex; align-items: center; justify-content: center; background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9IiNmOWZhZmIiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0iI2U1ZThlYiIvPgo8L3N2Zz4=');}
+    .testimonial-card { max-width: 650px; background: white; padding: 60px 50px 50px; border-radius: 32px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.03); transition: transform 0.4s;}
+    .testimonial-card:hover { transform: translateY(-10px); }
+    
+    .testimonial-img { 
+      width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 30px; 
+      border: 6px solid white; 
+      background: url('./testimonial.jpg') center/cover; 
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15); 
+      position: absolute; top: -50px; left: 50%; transform: translateX(-50%); 
+    }
+
+    .quote { font-family: var(--font-display); font-size: 1.7rem; font-style: italic; color: var(--dark); line-height: 1.5; margin-bottom: 30px; font-weight: 300; position: relative;}
+    .quote::before { content: '"'; font-size: 5rem; color: rgba(10, 147, 150, 0.1); position: absolute; top: -30px; left: -20px; font-family: serif; font-weight: 800;}
+    .author { font-weight: 800; color: var(--primary); font-size: 1.25rem; }
+    .role { font-size: 1rem; color: #777; margin-top: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;}
+
+    /* Feature 6 */
+    .contact-section { padding: 80px 60px; width: 100%; display: flex; gap: 50px; background: var(--dark); color: white; align-items: center;}
+    .contact-info { flex: 1; }
+    .contact-info h3 { font-family: var(--font-display); font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; color: white;}
+    .contact-info p { font-size: 1.1rem; color: #BBB; margin-bottom: 40px; line-height: 1.6;}
+    .contact-method { display: flex; align-items: center; margin-bottom: 25px; gap: 15px;}
+    .contact-icon { width: 50px; height: 50px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;}
+    .contact-text h5 { font-size: 1.1rem; margin-bottom: 4px; font-weight: 600;}
+    .contact-text span { color: #999; font-size: 0.95rem;}
+    .contact-map { flex: 1; height: 350px; background: #333; border-radius: 20px; overflow: hidden; position: relative;}
+    .contact-map::before { content:'Map Placeholder'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #666; font-weight: 600; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;}
+    
+  </style>
+</head>
+<body>
+
+  <div class="presentation-container">
+    <header class="presentation-header">
+      <h1>InAmigos Foundation</h1>
+      <p>NGO Website Essential Features Design Presentation (Task 5) <br> A visually engaging breakdown of the features required to maximize impact, donations, and volunteer engagement.</p>
+    </header>
+
+    <!-- Feature 1 -->
+    <section class="feature-block">
+      <div class="annotation">
+        <span class="badge">Feature 01</span>
+        <h2>Hero Section & Quick Donation</h2>
+        <p>The Hero section captures immediate attention with an emotional, high-quality image of your work. By placing a clear Call-To-Action (CTA) right at the top, visitors can instantly navigate to the donation portal, increasing conversion rates for the foundation.</p>
+      </div>
+      <div class="mockup-window">
+        <div class="browser-wrapper">
+          <div class="browser-bar">
+            <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="hero-section">
+              <div class="hero-overlay"></div>
+              <div class="hero-overlay-2"></div>
+              <div class="hero-content">
+                <h3>Empower Communities, Change Lives</h3>
+                <p>Join the InAmigos Foundation in our mission to bring education and resources to those who need it most.</p>
+                <a href="#" class="btn">Donate Now</a>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 2 -->
+    <section class="feature-block">
+      <div class="annotation">
+        <span class="badge">Feature 02</span>
+        <h2>Impact Showcase</h2>
+        <p>Transparency is vital for NGOs. The Impact Showcase uses bold typography and dynamic statistics to visually prove how donations and volunteer hours translate into real-world change. This builds trust with potential sponsors.</p>
+      </div>
+      <div class="mockup-window">
+        <div class="browser-wrapper">
+          <div class="browser-bar">
+            <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="impact-section">
+              <div class="impact-image"></div>
+              <div class="impact-stats">
+                <div class="stat-card">
+                  <div class="stat-number">10k+</div>
+                  <div class="stat-label">Lives Impacted</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">50+</div>
+                  <div class="stat-label">Active Campaigns</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">1.2k</div>
+                  <div class="stat-label">Volunteers</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-number">15</div>
+                  <div class="stat-label">Cities Reached</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 3 -->
+    <section class="feature-block">
+      <div class="annotation">
+        <span class="badge">Feature 03</span>
+        <h2>Campaigns & Events</h2>
+        <p>Highlighting ongoing campaigns creates a sense of urgency. Using progress bars helps supporters see how close a campaign is to its goal, motivating them to contribute and share the event on social media.</p>
+      </div>
+      <div class="mockup-window">
+        <div class="browser-wrapper">
+          <div class="browser-bar">
+            <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="campaigns-section">
+              <div class="campaigns-header">
+                <h3>Urgent Causes</h3>
+                <a href="#">View All &rarr;</a>
+              </div>
+              <div class="campaign-grid">
+                <div class="campaign-card">
+                  <div class="campaign-img c1">
+                    <div class="campaign-badge">Education</div>
+                  </div>
+                  <div class="campaign-info">
+                    <h4>Education for All 2026</h4>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 80%;"></div></div>
+                    <div class="progress-stats"><span>$8,000 raised</span><span>Goal: $10,000</span></div>
+                  </div>
+                </div>
+                <div class="campaign-card">
+                  <div class="campaign-img c2">
+                    <div class="campaign-badge">Relief</div>
+                  </div>
+                  <div class="campaign-info">
+                    <h4>Winter Relief Drive</h4>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+                    <div class="progress-stats"><span>$2,250 raised</span><span>Goal: $5,000</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 4 -->
+    <section class="feature-block">
+      <div class="annotation">
+        <span class="badge">Feature 04</span>
+        <h2>Volunteer Form</h2>
+        <p>A streamlined, accessible volunteer registration form removes friction for those wanting to help. Placing it alongside an inspiring message encourages user engagement and grows your on-the-ground support network.</p>
+      </div>
+      <div class="mockup-window">
+        <div class="browser-wrapper">
+          <div class="browser-bar">
+            <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="volunteer-section">
+              <div class="volunteer-text">
+                <h3>Become a Changemaker</h3>
+                <p>Your time and skills can transform a community. Sign up today and be part of the InAmigos family.</p>
+              </div>
+              <div class="volunteer-form">
+                <div class="form-group">
+                  <label>Full Name</label>
+                  <input type="text" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                  <label>Area of Interest</label>
+                  <select>
+                    <option>Education</option>
+                    <option>Healthcare</option>
+                    <option>Event Organizing</option>
+                  </select>
+                </div>
+                <button class="form-btn">Join Us Today</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 5 -->
+    <section class="feature-block">
+      <div class="annotation">
+        <span class="badge">Feature 05</span>
+        <h2>Testimonials & Social Proof</h2>
+        <p>Sharing real stories from volunteers, sponsors, or beneficiaries adds a human touch. Testimonials serve as powerful social proof, validating the NGO’s impact and encouraging others to get involved.</p>
+      </div>
+      <div class="mockup-window">
+        <div class="browser-wrapper">
+          <div class="browser-bar">
+            <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="testimonials-section">
+              <div class="testimonial-card">
+                
+                <div class="testimonial-img"></div>
+
+                <div class="quote">Volunteering with InAmigos completely changed my perspective. Seeing the direct impact of our work is incredibly rewarding.</div>
+                <div class="author">Singh</div>
+                <div class="role">Lead Volunteer, Education Drive</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature 6 -->
+    <section class="feature-block">
+      <div class="annotation">
+        <span class="badge">Feature 06</span>
+        <h2>Contact & Support Section</h2>
+        <p>A clear Contact & Support footer is vital for an NGO. It ensures that media, potential major sponsors, and volunteers can easily find your physical location, direct email, and social links without digging through the site.</p>
+      </div>
+      <div class="mockup-window">
+        <div class="browser-wrapper">
+          <div class="browser-bar">
+            <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          </div>
+          <div class="mockup-content">
+            <div class="contact-section">
+              <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>Have questions about our initiatives or want to partner with us? We'd love to hear from you.</p>
+                <div class="contact-method">
+                  <div class="contact-icon">📧</div>
+                  <div class="contact-text">
+                    <h5>Email Us</h5>
+                    <span>support@inamigos.org</span>
+                  </div>
+                </div>
+                <div class="contact-method">
+                  <div class="contact-icon">📍</div>
+                  <div class="contact-text">
+                    <h5>Visit Us</h5>
+                    <span>123 Foundation Way, City</span>
+                  </div>
+                </div>
+              </div>
+              <div class="contact-map"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
