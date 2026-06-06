@@ -242,6 +242,42 @@
     .contact-map { flex: 1; height: 350px; background: #333; border-radius: 20px; overflow: hidden; position: relative;}
     .contact-map::before { content:'Map Placeholder'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #666; font-weight: 600; font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;}
     
+    /* Responsive Design - Tablet & Mobile */
+    @media (max-width: 1024px) {
+      .feature-block { flex-direction: column; }
+      .annotation { padding: 40px; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); }
+      .mockup-window { padding: 30px; }
+      .hero-content h3 { font-size: 2.8rem; }
+      .impact-section { flex-direction: column; }
+      .impact-image { height: 250px; width: 100%; }
+      .volunteer-section { flex-direction: column; gap: 40px; }
+      .contact-section { flex-direction: column; gap: 40px; }
+      .campaign-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 30px 15px; }
+      .presentation-header h1 { font-size: 3rem; }
+      .presentation-header p { font-size: 1.1rem; }
+      .hero-section { padding: 40px 30px; text-align: center; }
+      .hero-content h3 { font-size: 2.2rem; }
+      .hero-content p { font-size: 1rem; }
+      .btn { padding: 14px 24px; font-size: 1rem; display: block; margin-bottom: 10px; }
+      .btn-secondary { margin-left: 0; }
+      .impact-section { padding: 40px 20px; }
+      .impact-stats { grid-template-columns: 1fr; }
+      .campaigns-section { padding: 40px 20px; }
+      .campaigns-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .volunteer-section { padding: 40px 20px; text-align: center; }
+      .volunteer-text h3 { font-size: 2.2rem; }
+      .volunteer-form { padding: 30px 20px; text-align: left; }
+      .testimonials-section { padding: 60px 20px; }
+      .testimonial-card { padding: 50px 30px 30px; }
+      .quote { font-size: 1.3rem; }
+      .quote::before { font-size: 3rem; top: -15px; left: -10px; }
+      .contact-section { padding: 40px 20px; }
+      .contact-info h3 { font-size: 2.2rem; }
+    }
   </style>
 </head>
 <body>
